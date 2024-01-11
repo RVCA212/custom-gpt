@@ -60,18 +60,18 @@ async def get_context(
     return context
 
 
-# @app.get("/")
-# async def get_context(query: str = None, credentials: HTTPAuthorizationCredentials = Depends(validate_token)):
+@app.get("/")
+async def get_context(query: str = None, credentials: HTTPAuthorizationCredentials = Depends(validate_token)):
 
-#     # convert query to embeddings
-#     res = openai_client.embeddings.create(
-#         input=[query],
-#         model="text-embedding-ada-002"
-#     )
-#     embedding = res.data[0].embedding
-#     # Search for matching Vectors
-#     results = index.query(embedding, top_k=6, include_metadata=True).to_dict()
-#     # Filter out metadata fron search result
-#     context = [match['metadata']['text'] for match in results['matches']]
-#     # Retrun context
-#     return context
+    # convert query to embeddings
+    res = openai_client.embeddings.create(
+        input=[query],
+        model="text-embedding-ada-002"
+    )
+    embedding = res.data[0].embedding
+    # Search for matching Vectors
+    results = index.query(embedding, top_k=6, include_metadata=True).to_dict()
+    # Filter out metadata fron search result
+    context = [match['metadata']['text'] for match in results['matches']]
+    # Retrun context
+    return context
